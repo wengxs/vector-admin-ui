@@ -1,47 +1,34 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <el-config-provider :locale="locale" :size="size">
+    <!-- 开启水印 -->
+    <el-watermark
+      v-if="watermarkEnabled"
+      :font="{ color: fontColor }"
+      :content="defaultSettings.watermarkContent"
+      class="wh-full"
+    >
+      <router-view />
+    </el-watermark>
+    <!-- 关闭水印 -->
+    <router-view v-else />
+  </el-config-provider>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup lang="ts">
+import { useAppStore, useSettingsStore } from "@/store";
+import defaultSettings from "@/settings";
+import { ThemeEnum } from "@/enums/ThemeEnum";
+import { SizeEnum } from "@/enums/SizeEnum";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+const appStore = useAppStore();
+const settingsStore = useSettingsStore();
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+const locale = computed(() => appStore.locale);
+const size = computed(() => appStore.size as SizeEnum);
+const watermarkEnabled = computed(() => settingsStore.watermarkEnabled);
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+// 明亮/暗黑主题水印字体颜色适配
+const fontColor = computed(() => {
+  return settingsStore.theme === ThemeEnum.DARK ? "rgba(255, 255, 255, .15)" : "rgba(0, 0, 0, .15)";
+});
+</script>
