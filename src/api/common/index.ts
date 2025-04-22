@@ -9,7 +9,7 @@ import { FileInfo } from "./types";
 export const uploadFile = (file: File): AxiosPromise<FileInfo> => {
   const formData = new FormData();
   formData.append("file", file);
-  return request.post("/third/file", formData, {
+  return request.post("/third-api/file", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 };
@@ -19,7 +19,7 @@ export const uploadFile = (file: File): AxiosPromise<FileInfo> => {
  * @param filePath 文件完整路径
  */
 export const deleteFile = (filePath?: string) =>
-  request.delete("/third/file", { params: { filePath: filePath } });
+  request.delete("/third-api/file", { params: { filePath: filePath } });
 
 /**
  * 根据枚举名称获取枚举列表
