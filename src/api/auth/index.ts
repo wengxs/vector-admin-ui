@@ -16,7 +16,7 @@ export function loginApi(data: LoginData): AxiosPromise<string | any> {
   // formData.append("captchaKey", data.captchaKey || "");
   // formData.append("captchaCode", data.captchaCode || "");
   return request({
-    url: import.meta.env.VITE_APP_LOGIN_URI,
+    url: "/auth-api/oauth2/token",
     method: "post",
     data: formData,
     headers: {
@@ -29,9 +29,9 @@ export function loginApi(data: LoginData): AxiosPromise<string | any> {
 /**
  * 注销API
  */
-export const logoutApi = () => request.delete(import.meta.env.VITE_APP_LOGOUT_URI);
+export const logoutApi = () => request.delete("/auth-api/logout");
 
 /**
  * 获取验证码
  */
-export const getCaptchaApi = (): AxiosPromise<CaptchaResult> => request.get("/auth/captcha");
+export const getCaptchaApi = (): AxiosPromise<CaptchaResult> => request.get("/auth-api/auth/captcha");
