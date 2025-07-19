@@ -175,8 +175,8 @@
 
 <script setup lang="ts">
 import { defineComponent } from "vue";
-import { getTable, updateTable } from "@/api/gen/code";
-import { TableVO } from "@/api/gen/code/types";
+import { getTable, updateTable } from "@/api/dev/codeGen";
+import { TableVO } from "@/api/dev/codeGen/types";
 import { Check, Close } from "@element-plus/icons-vue";
 
 defineComponent({
@@ -240,7 +240,7 @@ defineExpose({
 
 const close = () => {
   Object.keys(tableData).forEach((key) => {
-    tableData[key] = undefined;
+    (tableData as {[key: string]: any})[key] = undefined;
   });
 };
 

@@ -135,13 +135,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { TableQuery, TableVO } from "@/api/gen/code/types";
-import { listTable, delTable, previewCode, listDatabase } from "@/api/gen/code";
-import ImportTable from "@/views/gen/code/import-table.vue";
-import EditTable from "@/views/gen/code/edit-table.vue";
+import { TableQuery, TableVO } from "@/api/dev/codeGen/types";
+import { listTable, delTable, previewCode, listDatabase } from "@/api/dev/codeGen";
+import ImportTable from "@/views/dev/codeGen/import-table.vue";
+import EditTable from "@/views/dev/codeGen/edit-table.vue";
 
 defineOptions({
-  name: "GenCode",
+  name: "CodeGeneration",
   inheritAttrs: false,
 });
 

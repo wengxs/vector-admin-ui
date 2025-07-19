@@ -55,8 +55,8 @@
 
 <script setup lang="ts">
 import { defineComponent } from "vue";
-import { listDbTable, importTable, listDatabase } from "@/api/gen/code";
-import { TableQuery, TableVO } from "@/api/gen/code/types";
+import { listDbTable, importTable, listDatabase } from "@/api/dev/codeGen";
+import { TableQuery, TableVO } from "@/api/dev/codeGen/types";
 
 defineComponent({
   name: "ImportTable",
